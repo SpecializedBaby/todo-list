@@ -33,10 +33,7 @@ class ToggleTaskStatusView(generic.View):
     def get(self, request, pk):
         task = Task.objects.get(id=pk)
 
-        if task.is_done:
-            task.is_done = False
-        else:
-            task.is_done = True
+        task.is_done = not task.is_done
         task.save()
 
         return redirect("task_manager:task-list")
